@@ -11,7 +11,6 @@ namespace Agoda.Controllers
 {
     public class DefaultController : Controller
     {
-        private HotelDBContext db = new HotelDBContext();
 
         //
         // GET: /Default/
@@ -23,7 +22,9 @@ namespace Agoda.Controllers
 
         public ActionResult Static()
         {
-            return View(db.Hotels.ToList());
+            var hotelRepository = new HotelRepository();
+            var hotelList = hotelRepository.fetchHotels();
+            return View(hotelList);
         }
 
         public ActionResult Ajax()
